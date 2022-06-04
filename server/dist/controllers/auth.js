@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.signUp = void 0;
+exports.login = exports.signUp = void 0;
 const bcryptjs_1 = __importDefault(require("bcryptjs"));
 const User_1 = require("../models/User");
 const generateJWT_1 = require("../helpers/generateJWT");
@@ -42,10 +42,46 @@ const signUp = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         });
     }
     catch (error) {
+        console.log(error);
         res.status(500).json({
             msg: error
         });
     }
+    ;
 });
 exports.signUp = signUp;
+const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { email, password } = req.body;
+        // Check if the user exists with the email
+        const userDB = yield User_1.User.findOne({ email });
+        if (!userDB) {
+            res.status(403).json({
+                msg: 'Email doesn`t exist.'
+            });
+        }
+        ;
+        // Validate password
+        const validPassword = bcryptjs_1.default.compareSync(password, userDB === null || userDB === void 0 ? void 0 : userDB.password);
+        if (!validPassword) {
+            res.status(403).json({
+                msg: 'The password you entered is not correct.'
+            });
+        }
+        ;
+        // Get Token
+        const token = yield (0, generateJWT_1.generateAccessToken)(userDB === null || userDB === void 0 ? void 0 : userDB.id);
+        res.status(200).json({
+            user: userDB,
+            token
+        });
+    }
+    catch (error) {
+        res.status(500).json({
+            msg: error
+        });
+    }
+    ;
+});
+exports.login = login;
 //# sourceMappingURL=auth.js.map

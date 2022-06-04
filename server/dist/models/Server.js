@@ -15,12 +15,14 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const error404_1 = __importDefault(require("../routes/error404"));
 const upload_1 = __importDefault(require("../routes/upload"));
+const auth_1 = __importDefault(require("../routes/auth"));
 const config_1 = require("../database/config");
 class Server {
     constructor() {
         this.path = {
             error404: '*',
-            upload: '/api/upload'
+            upload: '/api/upload',
+            auth: '/api/auth'
         };
         this.app = (0, express_1.default)();
         this.port = process.env.PORT;
@@ -36,6 +38,7 @@ class Server {
     }
     routes() {
         this.app.use(this.path.upload, upload_1.default);
+        this.app.use(this.path.auth, auth_1.default);
         this.app.use(this.path.error404, error404_1.default);
     }
     ;
