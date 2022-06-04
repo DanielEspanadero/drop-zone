@@ -21,6 +21,8 @@ const UserSchema = new mongoose_1.Schema({
         type: String,
         required: [true, 'password is required.'],
     }
+}, {
+    versionKey: false,
 });
 exports.User = (0, mongoose_1.model)('User', UserSchema);
 //# sourceMappingURL=User.js.map

@@ -36,8 +36,6 @@ export const signUp = async (req: Request, res: Response) => {
             token
         });
     } catch (error) {
-        console.log(error);
-        
         res.status(500).json({
             msg: error
         });
@@ -52,7 +50,7 @@ export const login = async (req: Request, res: Response) => {
         const userDB = await User.findOne({ email });
 
         if (!userDB) {
-            res.status(403).json({
+            return res.status(403).json({
                 msg: 'Email doesn`t exist.'
             });
         };
@@ -61,7 +59,7 @@ export const login = async (req: Request, res: Response) => {
         const validPassword: boolean = bcryptjs.compareSync(password, userDB?.password!);
 
         if (!validPassword) {
-            res.status(403).json({
+            return res.status(403).json({
                 msg: 'The password you entered is not correct.'
             });
         };
@@ -74,7 +72,7 @@ export const login = async (req: Request, res: Response) => {
             token
         });
     } catch (error) {
-        res.status(500).json({
+        return res.status(500).json({
             msg: error
         });
     };

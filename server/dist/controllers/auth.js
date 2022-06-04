@@ -42,7 +42,6 @@ const signUp = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         });
     }
     catch (error) {
-        console.log(error);
         res.status(500).json({
             msg: error
         });
@@ -56,7 +55,7 @@ const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         // Check if the user exists with the email
         const userDB = yield User_1.User.findOne({ email });
         if (!userDB) {
-            res.status(403).json({
+            return res.status(403).json({
                 msg: 'Email doesn`t exist.'
             });
         }
@@ -64,7 +63,7 @@ const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         // Validate password
         const validPassword = bcryptjs_1.default.compareSync(password, userDB === null || userDB === void 0 ? void 0 : userDB.password);
         if (!validPassword) {
-            res.status(403).json({
+            return res.status(403).json({
                 msg: 'The password you entered is not correct.'
             });
         }
@@ -77,7 +76,7 @@ const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         });
     }
     catch (error) {
-        res.status(500).json({
+        return res.status(500).json({
             msg: error
         });
     }

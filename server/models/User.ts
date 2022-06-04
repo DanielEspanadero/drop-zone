@@ -25,6 +25,10 @@ const UserSchema = new Schema({
         type: String,
         required: [true, 'password is required.'],
     }
-});
+},
+    {
+        versionKey: false,
+    }
+);
 
 export const User = model<IUser>('User', UserSchema);

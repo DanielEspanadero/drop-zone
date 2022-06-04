@@ -27,6 +27,7 @@ class Server {
         this.app = (0, express_1.default)();
         this.port = process.env.PORT;
         this.dbConnect();
+        this.middlewares();
         this.routes();
         this.listen();
     }
@@ -36,6 +37,11 @@ class Server {
             yield (0, config_1.connectDB)();
         });
     }
+    ;
+    middlewares() {
+        this.app.use(express_1.default.json());
+    }
+    ;
     routes() {
         this.app.use(this.path.upload, upload_1.default);
         this.app.use(this.path.auth, auth_1.default);

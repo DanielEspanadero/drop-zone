@@ -20,13 +20,18 @@ class Server {
         this.port = process.env.PORT as string;
 
         this.dbConnect();
+        this.middlewares();
         this.routes();
         this.listen();
     };
 
     async dbConnect() {
         await connectDB();
-    }
+    };
+
+    middlewares() {
+        this.app.use(express.json());
+    };
 
     routes() {
         this.app.use(this.path.upload, routerUpload);
