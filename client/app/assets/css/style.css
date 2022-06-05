@@ -1,0 +1,12 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    user-select: none;
+    font-family: 'kdam', Helvetica, sans-serif;
+}
+
+@font-face {
+    font-family: 'kdam';
+    src: url('../fonts/KdamThmorPro-Regular.ttf');
+}

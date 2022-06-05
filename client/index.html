@@ -1,13 +1,46 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Green Lab | Sign In</title>
+    <link rel="icon" href="./app/assets/images/alien.icon">
+    <link rel="stylesheet" href="./app/assets/css/style.css">
+    <link rel="stylesheet" href="./app/assets/css/index.css">
 </head>
+
 <body>
-    <main id="root"></main>
+    <main id="main">
+        <img id="cohete" src="./app/assets/images/cohete.png" alt="cohete">
+        <img id="ufo" src="./app/assets/images/ufo.png" alt="ufo">
+        <div id="form-container">
+            <section>
+                <article>
+                    <h1 id="title">WELCOME TO GREEN LAB</h1>
+                    <img id="abstract" src="./app/assets/images/abstract.jpeg" alt="abstract">
+                    <p class="text">Green lab &reg; is a new concept of drag and drop where, unlike our competition, we don't spy on your data. Our goal is the
+                    well-being of our clients and for that reason we want them to have an unforgettable experience. <br><br>
+                    We are a company located in Barcelona and our philosophy is to always give our best. <br><br>
+                    If you want to live an incredible experience with us, register and you will be able to see all the services we offer, your files will be safer than ever.
+                    </p>
+                    <p class="text">Created by <a href="https://github.com/DanielEspanadero" target="_BLANK">Daniel Españadero Fernández</a></p>
+                </article>
+            </section>
+            <section id="section-form">
+            <form id="form">
+                <label for="email">Email:</label>
+                <input type="email" name="email">
+                <label for="password">Password:</label>
+                <input type="password" name="password">
+                <button type="submit">Submit</button>
+            </form>
+            <p class="text signup">If you are not registered, <a href="./app/pages/signup.html">sign up</a></p>
+            </section>
+        </div>
+    </main>
     <script src="./app/dist/index.js" type="module"></script>
 </body>
+
 </html>
