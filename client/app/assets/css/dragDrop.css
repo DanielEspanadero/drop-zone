@@ -1,0 +1,72 @@
+body {
+    overflow: hidden;
+}
+
+#main {
+    width: 100%;
+    height: 100vh;
+    background-color: #0f0d1c;
+}
+
+.drop-area {
+    position: relative;
+    top: 15%;
+    left: 5%;
+    height: 70%;
+    width: 60%;
+    box-shadow: 2px 2px 80px #468c40;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    color: #fff;
+}
+
+.drop-area.active {
+    background-color: #1a1631;
+    color: #468c40;
+    box-shadow: 2px 2px 80px #468c40;
+}
+
+.drop-area>h2 {
+    font-size: 2rem;
+}
+
+.drop-area>span {
+    font-size: 1.8rem;
+}
+
+.drop-area>button{
+    padding: .8rem 1.2rem;
+    font-size: 1.2rem;
+    border: 0;
+    outline: none;
+    background-color: #468c40;
+    color: #0f0d1c;
+    cursor: pointer;
+    margin: 1.2rem;
+}
+
+.file-container{
+    display: flex;
+    align-items: center;
+    gap: .8rem;
+    padding: .8rem;
+    border: 1px solid #468c40;
+}
+
+#preview{
+    margin-top: .8rem;
+}
+
+.status-text{
+    padding: 0 10px;
+}
+
+.success{
+    color: #468c40;
+}
+
+.failure{
+    color: #f00;
+}

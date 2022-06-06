@@ -4,9 +4,21 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>drag & Drop</title>
+    <title>Green Lab | drag & Drop</title>
+    <link rel="icon" href="../assets/images/alien.icon">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/dragDrop.css">
 </head>
 <body>
-    
+    <main id="main">
+        <div class="drop-area">
+            <h2>Drag and drop files</h2>
+            <span>Or</span>
+            <button>Select your files</button>
+            <input type="file" name="file" id="input-file" hidden multiple>
+        </div>
+        <div id="preview"></div>
+    </main>
+    <script src="../dist/index.js"></script>
 </body>
 </html>
