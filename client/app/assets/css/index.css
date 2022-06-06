@@ -150,7 +150,7 @@ body {
     overflow-y: auto;
 }
 
-#form {
+.form {
     display: flex;
     width: 100%;
     flex-direction: column;
@@ -160,7 +160,7 @@ body {
     font-size: 1.5rem;
 }
 
-#form>input {
+.form>input {
     outline: none;
     border: 0;
     margin-bottom: .5rem;
@@ -172,17 +172,17 @@ body {
     background-color: #0d430a99;
 }
 
-#form>input:hover {
+.form>input:hover {
     background-color: #0d430a66;
 }
 
-#form>input:focus {
+.form>input:focus {
     color: #051503;
     background-color: #0d430acc;
     border-bottom: 2px solid #082806;
 }
 
-#form>button {
+.form>button {
     margin: 1.5rem;
     padding: .3rem 2rem;
     font-size: 1.5rem;
@@ -191,13 +191,13 @@ body {
     background-color: #0d430acc;
 }
 
-#form>button:hover {
+.form>button:hover {
     background-color: #082806;
     color: #0d430acc;
     cursor: pointer;
 }
 
-#form>button:active {
+.form>button:active {
     background-color: #0d430acc;
     color: #fff;
     cursor: pointer;

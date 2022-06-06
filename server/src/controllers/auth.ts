@@ -21,22 +21,24 @@ export const signUp = async (req: Request, res: Response) => {
         };
 
         // Encrypt the password.
-        const salt = bcryptjs.genSaltSync(10);
+        const salt: string = bcryptjs.genSaltSync(10);
         newUser.password = bcryptjs.hashSync(password, salt);
 
         // Save to DB.
         await newUser.save();
 
         // Get Token
-        const token = await generateAccessToken(newUser.id);
+        const token: string = await generateAccessToken(newUser.id);
 
         res.status(200).json({
             newUser,
             token
         });
     } catch (error) {
+        console.log(error);
+        
         res.status(500).json({
-            msg: error
+            msg: error,
         });
     };
 };
@@ -64,7 +66,7 @@ export const login = async (req: Request, res: Response) => {
         };
 
         // Get Token
-        const token = await generateAccessToken(userDB?.id!);
+        const token: string = await generateAccessToken(userDB?.id!);
 
         res.status(200).json({
             user: userDB,

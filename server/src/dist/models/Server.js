@@ -13,6 +13,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
+const cors_1 = __importDefault(require("cors"));
 const error404_1 = __importDefault(require("../routes/error404"));
 const upload_1 = __importDefault(require("../routes/upload"));
 const auth_1 = __importDefault(require("../routes/auth"));
@@ -40,6 +41,19 @@ class Server {
     ;
     middlewares() {
         this.app.use(express_1.default.json());
+        this.app.use((0, cors_1.default)({
+            allowedHeaders: [
+                'Origin',
+                'X-Requested-With',
+                'Content-Type',
+                'Accept',
+                'X-Access-Token',
+            ],
+            credentials: true,
+            methods: 'GET,HEAD,OPTIONS,PUT,PATCH,POST,DELETE',
+            origin: '*',
+            preflightContinue: false,
+        }));
     }
     ;
     routes() {
