@@ -1,20 +1,22 @@
-//TODO Arreglar peticiones fetch al servidor (Devuelven error 500).
-//TODO Realizar validaciones desde el backend
-//TODO Realizar validaciones desde el frontend
-
 if (!localStorage.getItem('token')) {
     window.location.href = '../../index.html';
 };
 
-const dropArea: any = document.querySelector('.drop-area');
-const dragText: any = document.querySelector('h2');
+const dropArea: any = document.querySelector('.drop-area')!;
+const dragText: any = document.querySelector('h2')!;
 const button: any = document.querySelector('button')!;
 const input: any = document.querySelector('#input-file')!;
+const logout: any = document.querySelector('#logout')!;
 let files;
 
 button.addEventListener('click', () => {
     input.click();
 });
+
+logout.addEventListener('click', () => {
+    localStorage.removeItem('token');
+    location.reload();
+})
 
 input.addEventListener('change', (e: any) => {
     e.preventDefault();
@@ -57,13 +59,13 @@ let showFile = (files: any) => {
 
 let processFile = (file: any) => {
     const docType = file.type;
-    const validExtensions = ['image/jpg', 'image/jpeg', 'image/png', 'image/gif'];
+    const validExtensions: Array<string> = ['image/jpg', 'image/jpeg', 'image/png', 'image/gif'];
 
     if (validExtensions.includes(docType)) {
-        const fileReader = new FileReader();
-        const id = `file-${Math.random().toString(32).substring(7)}`
-
-        fileReader.addEventListener('load', (e: any) => {
+        const fileReader: any = new FileReader();
+        const id: string = `file-${Math.random().toString(32).substring(7)}`;
+        
+        fileReader.addEventListener('load', () => {
             const fileURL = fileReader.result;
             const image = `
             <div id='${id}' class='file-container'>
@@ -81,25 +83,25 @@ let processFile = (file: any) => {
             uploadFile(file, id);
         });
     } else {
-        alert(`It isn't a valid file`)
+        alert(`It isn't a valid file`);
     };
 };
 
 let uploadFile = async (file: any, id: any) => {
     const formData = new FormData();
     formData.append('file', file);
-
+    
     try {
         const url = 'http://localhost:8080/api/upload';
-        const response = fetch(url, {
+        const response: any = fetch(url, {
             method: 'POST',
             body: JSON.stringify(formData),
             headers: { 'Content-Type': 'application/json' }
         });
-
-        // const responseText: any = await response.text();
-        // console.log(responseText);
         
+        const responseText: any = response.text();
+        console.log(responseText);
+
         document.querySelector(`#${id} .status-text`)!.innerHTML = `<span class='success'>Archivo subido correctamente...</span>`;
     } catch (error) {
         document.querySelector(`#${id} .status-text`)!.innerHTML = `<span class='failure'>El archivo no pudo subirse...</span>`;

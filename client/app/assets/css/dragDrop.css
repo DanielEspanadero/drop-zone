@@ -1,11 +1,15 @@
 body {
-    overflow: hidden;
-}
-
-#main {
+    display: flex;
+    flex-direction: row;
+    /* overflow: hidden; */
     width: 100%;
     height: 100vh;
     background-color: #0f0d1c;
+}
+
+#main {
+    width: 70%;
+    height: 100vh;
 }
 
 .drop-area {
@@ -13,7 +17,7 @@ body {
     top: 15%;
     left: 5%;
     height: 70%;
-    width: 60%;
+    width: 80%;
     box-shadow: 2px 2px 80px #468c40;
     display: flex;
     align-items: center;
@@ -36,7 +40,7 @@ body {
     font-size: 1.8rem;
 }
 
-.drop-area>button {
+.button {
     padding: .8rem 1.2rem;
     font-size: 1.2rem;
     border: 0;
@@ -45,6 +49,11 @@ body {
     color: #0f0d1c;
     cursor: url('../images/green-rat.png'), pointer;
     margin: 1.2rem;
+    box-shadow: 1px 1px 5px #468c40;
+}
+
+.button:active {
+    box-shadow: none;
 }
 
 .file-container {
@@ -69,4 +78,30 @@ body {
 
 .failure {
     color: #f00;
+}
+
+#aside {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 30%;
+}
+
+#aside>h1 {
+    color: #468c40;
+    text-shadow: 1px 1px #7bbf08;
+    font-size: 2rem;
+}
+
+#aside>p {
+    color: #fff;
+    margin: 1rem 1.5rem;
+    text-align: justify;
+}
+
+#hojas {
+    width: 60%;
+    margin-top: 10px;
 }

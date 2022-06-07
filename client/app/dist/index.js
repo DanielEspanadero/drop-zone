@@ -1,7 +1,4 @@
 "use strict";
-//TODO Arreglar peticiones fetch al servidor (Devuelven error 500).
-//TODO Realizar validaciones desde el backend
-//TODO Realizar validaciones desde el frontend
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -19,9 +16,14 @@ const dropArea = document.querySelector('.drop-area');
 const dragText = document.querySelector('h2');
 const button = document.querySelector('button');
 const input = document.querySelector('#input-file');
+const logout = document.querySelector('#logout');
 let files;
 button.addEventListener('click', () => {
     input.click();
+});
+logout.addEventListener('click', () => {
+    localStorage.removeItem('token');
+    location.reload();
 });
 input.addEventListener('change', (e) => {
     e.preventDefault();
@@ -65,7 +67,7 @@ let processFile = (file) => {
     if (validExtensions.includes(docType)) {
         const fileReader = new FileReader();
         const id = `file-${Math.random().toString(32).substring(7)}`;
-        fileReader.addEventListener('load', (e) => {
+        fileReader.addEventListener('load', () => {
             const fileURL = fileReader.result;
             const image = `
             <div id='${id}' class='file-container'>
@@ -97,8 +99,8 @@ let uploadFile = (file, id) => __awaiter(void 0, void 0, void 0, function* () {
             body: JSON.stringify(formData),
             headers: { 'Content-Type': 'application/json' }
         });
-        // const responseText: any = await response.text();
-        // console.log(responseText);
+        const responseText = response.text();
+        console.log(responseText);
         document.querySelector(`#${id} .status-text`).innerHTML = `<span class='success'>Archivo subido correctamente...</span>`;
     }
     catch (error) {
