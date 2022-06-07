@@ -36,18 +36,18 @@ body {
     font-size: 1.8rem;
 }
 
-.drop-area>button{
+.drop-area>button {
     padding: .8rem 1.2rem;
     font-size: 1.2rem;
     border: 0;
     outline: none;
     background-color: #468c40;
     color: #0f0d1c;
-    cursor: pointer;
+    cursor: url('../images/green-rat.png'), pointer;
     margin: 1.2rem;
 }
 
-.file-container{
+.file-container {
     display: flex;
     align-items: center;
     gap: .8rem;
@@ -55,18 +55,18 @@ body {
     border: 1px solid #468c40;
 }
 
-#preview{
+#preview {
     margin-top: .8rem;
 }
 
-.status-text{
+.status-text {
     padding: 0 10px;
 }
 
-.success{
+.success {
     color: #468c40;
 }
 
-.failure{
+.failure {
     color: #f00;
 }

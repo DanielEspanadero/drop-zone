@@ -4,6 +4,7 @@
     box-sizing: border-box;
     user-select: none;
     font-family: 'kdam', Helvetica, sans-serif;
+    cursor: url('../images/green-cursor.png'), default;
 }
 
 @font-face {

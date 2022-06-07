@@ -132,7 +132,7 @@ body {
 .text>a {
     color: #0d430a;
     text-decoration: none;
-    cursor: pointer;
+    cursor: url('../images/green-rat.png'), pointer;
 }
 
 .text>a:hover {
@@ -194,13 +194,13 @@ body {
 .form>button:hover {
     background-color: #082806;
     color: #0d430acc;
-    cursor: pointer;
+    cursor: url('../images/green-rat.png'), pointer;
 }
 
 .form>button:active {
     background-color: #0d430acc;
     color: #fff;
-    cursor: pointer;
+    cursor: url('../images/green-rat.png'), pointer;
 }
 
 .signup {
@@ -209,5 +209,5 @@ body {
 }
 
 .signup>a {
-    cursor: pointer;
+    cursor: url('../images/green-rat.png'), pointer;
 }
