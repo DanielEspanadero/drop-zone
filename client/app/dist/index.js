@@ -1,9 +1,7 @@
 "use strict";
 //TODO Arreglar peticiones fetch al servidor (Devuelven error 500).
-//TODO Crear HTML + CSS de drag and drop
 //TODO Realizar validaciones desde el backend
 //TODO Realizar validaciones desde el frontend
-//TODO Optimizar código
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -13,6 +11,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+if (!localStorage.getItem('token')) {
+    window.location.href = '../../index.html';
+}
+;
 const dropArea = document.querySelector('.drop-area');
 const dragText = document.querySelector('h2');
 const button = document.querySelector('button');
@@ -90,15 +92,17 @@ let uploadFile = (file, id) => __awaiter(void 0, void 0, void 0, function* () {
     formData.append('file', file);
     try {
         const url = 'http://localhost:8080/api/upload';
-        const response = yield fetch(url, {
+        const response = fetch(url, {
             method: 'POST',
-            body: formData
+            body: JSON.stringify(formData),
+            headers: { 'Content-Type': 'application/json' }
         });
-        const responseText = yield response.text();
-        console.log(responseText);
+        // const responseText: any = await response.text();
+        // console.log(responseText);
         document.querySelector(`#${id} .status-text`).innerHTML = `<span class='success'>Archivo subido correctamente...</span>`;
     }
     catch (error) {
         document.querySelector(`#${id} .status-text`).innerHTML = `<span class='failure'>El archivo no pudo subirse...</span>`;
     }
+    ;
 });

@@ -5,10 +5,8 @@ formSignUp.addEventListener('submit', (e) => {
     const url = 'http://localhost:8080/api/auth/signup';
     const formData = {};
     for (let el of formSignUp.elements) {
-        if (el.name.lenght < 0) {
+        if (el.name.length > 0)
             formData[el.name] = el.value;
-        }
-        ;
     }
     ;
     fetch(url, {
@@ -22,11 +20,12 @@ formSignUp.addEventListener('submit', (e) => {
             return console.error(msg);
         }
         localStorage.setItem('token', token);
-        window.location.href = 'client/app/pages/dragDrop.html';
+        window.location.href = 'dragDrop.html';
     })
         .catch(err => console.error(err));
+    console.log(formSignUp.elements);
 });
 if (localStorage.getItem('token')) {
-    window.location.href = 'client/app/pages/dragDrop.html';
+    window.location.href = 'dragDrop.html';
 }
 ;

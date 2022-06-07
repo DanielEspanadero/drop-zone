@@ -12,7 +12,6 @@ export const signUp = async (req: Request, res: Response) => {
         const newUser = new User({ firstName, lastName, email, password });
 
         // Check if the email exists.
-
         const existEmail = await User.findOne({ email });
         if (existEmail) {
             return res.status(400).json({
@@ -21,14 +20,14 @@ export const signUp = async (req: Request, res: Response) => {
         };
 
         // Encrypt the password.
-        const salt: string = bcryptjs.genSaltSync(10);
+        const salt: any = bcryptjs.genSaltSync(10);
         newUser.password = bcryptjs.hashSync(password, salt);
 
         // Save to DB.
         await newUser.save();
 
         // Get Token
-        const token: string = await generateAccessToken(newUser.id);
+        const token: any = await generateAccessToken(newUser.id);
 
         res.status(200).json({
             newUser,

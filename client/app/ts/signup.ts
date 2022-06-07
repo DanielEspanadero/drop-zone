@@ -1,4 +1,4 @@
-const formSignUp: any = document.querySelector('#form-signup')!;
+const formSignUp: any = document.querySelector('#form-signup');
 
 formSignUp.addEventListener('submit', (e: any) => {
     e.preventDefault();
@@ -7,9 +7,8 @@ formSignUp.addEventListener('submit', (e: any) => {
     const formData: any = {};
 
     for (let el of formSignUp.elements) {
-        if (el.name.lenght < 0) {
+        if (el.name.length > 0)
             formData[el.name] = el.value;
-        };
     };
 
     fetch(url, {
@@ -23,11 +22,12 @@ formSignUp.addEventListener('submit', (e: any) => {
                 return console.error(msg);
             }
             localStorage.setItem('token', token);
-            window.location.href = 'client/app/pages/dragDrop.html';
+            window.location.href = 'dragDrop.html';
         })
-        .catch(err => console.error(err))
+        .catch(err => console.error(err));
+    console.log(formSignUp.elements);
 });
 
 if (localStorage.getItem('token')) {
-    window.location.href = 'client/app/pages/dragDrop.html';
+    window.location.href = 'dragDrop.html';
 };

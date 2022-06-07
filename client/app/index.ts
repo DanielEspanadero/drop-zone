@@ -1,9 +1,10 @@
 //TODO Arreglar peticiones fetch al servidor (Devuelven error 500).
-//TODO Crear HTML + CSS de drag and drop
 //TODO Realizar validaciones desde el backend
 //TODO Realizar validaciones desde el frontend
-//TODO Optimizar código
 
+if (!localStorage.getItem('token')) {
+    window.location.href = '../../index.html';
+};
 
 const dropArea: any = document.querySelector('.drop-area');
 const dragText: any = document.querySelector('h2');
@@ -90,16 +91,17 @@ let uploadFile = async (file: any, id: any) => {
 
     try {
         const url = 'http://localhost:8080/api/upload';
-        const response = await fetch(url, {
+        const response = fetch(url, {
             method: 'POST',
-            body: formData
+            body: JSON.stringify(formData),
+            headers: { 'Content-Type': 'application/json' }
         });
 
-        const responseText = await response.text();
-        console.log(responseText);
+        // const responseText: any = await response.text();
+        // console.log(responseText);
         
         document.querySelector(`#${id} .status-text`)!.innerHTML = `<span class='success'>Archivo subido correctamente...</span>`;
     } catch (error) {
         document.querySelector(`#${id} .status-text`)!.innerHTML = `<span class='failure'>El archivo no pudo subirse...</span>`;
-    }
-}
+    };
+};
