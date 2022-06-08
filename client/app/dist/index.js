@@ -67,7 +67,6 @@ let processFile = (file) => {
     const fileReader = new FileReader();
     if (validExtensions.includes(docType)) {
         const id = `file-${Math.random().toString(32).substring(7)}`;
-        console.log(fileReader);
         fileReader.addEventListener('load', () => {
             const fileURL = fileReader.result;
             const image = `

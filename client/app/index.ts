@@ -20,7 +20,7 @@ logout.addEventListener('click', () => {
 
 input.addEventListener('change', (e: Event) => {
     e.preventDefault();
-    
+
     files = input.files;
     dropArea.classList.add('active');
     showFile(files);
@@ -29,7 +29,7 @@ input.addEventListener('change', (e: Event) => {
 
 dropArea.addEventListener('dragover', (e: Event) => {
     e.preventDefault();
-    
+
     dropArea.classList.add('active');
     dragText.textContent = 'Drop to upload the files.';
 });
@@ -51,7 +51,7 @@ dropArea.addEventListener('drop', (e: any) => {
 let showFile = (files: any) => {
     if (files.length === undefined) {
         processFile(files);
-        
+
     } else {
         for (const file of files) {
             processFile(file);
@@ -66,8 +66,7 @@ let processFile = (file: any) => {
     const fileReader = new FileReader();
     if (validExtensions.includes(docType)) {
         const id: string = `file-${Math.random().toString(32).substring(7)}`;
-        console.log(fileReader);
-        
+
         fileReader.addEventListener('load', () => {
             const fileURL = fileReader.result;
             const image = `
@@ -85,16 +84,16 @@ let processFile = (file: any) => {
             fileReader.readAsDataURL(file);
             uploadFile(file, id);
         });
-        
+
     } else {
         alert(`It isn't a valid file`);
     };
 };
 
-let uploadFile = async (file: any, id: any) => {
+let uploadFile = async (file: string | Blob, id: string) => {
     const formData = new FormData();
     formData.append('file', file);
-    
+
     try {
         const url = 'http://localhost:8080/api/upload';
         const token = localStorage.getItem('token');
@@ -110,8 +109,8 @@ let uploadFile = async (file: any, id: any) => {
             headers: myHeaders,
             mode: 'no-cors'
         });
-        
-        const responseText: any = response.text();
+
+        const responseText: object = response.text();
         console.log(responseText);
 
         document.querySelector(`#${id} .status-text`)!.innerHTML = `<span class='success'>Archivo subido correctamente...</span>`;
