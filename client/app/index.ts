@@ -2,11 +2,11 @@ if (!localStorage.getItem('token')) {
     window.location.href = '../../index.html';
 };
 
-const dropArea: any = document.querySelector('.drop-area')!;
-const dragText: any = document.querySelector('h2')!;
-const button: any = document.querySelector('button')!;
-const input: any = document.querySelector('#input-file')!;
-const logout: any = document.querySelector('#logout')!;
+const dropArea: HTMLDivElement = document.querySelector('.drop-area')!;
+const dragText: HTMLElement = document.querySelector('h2')!;
+const button: HTMLButtonElement = document.querySelector('button')!;
+const input: HTMLInputElement = document.querySelector('#input-file')!;
+const logout: HTMLButtonElement = document.querySelector('#logout')!;
 let files;
 
 button.addEventListener('click', () => {
@@ -18,22 +18,23 @@ logout.addEventListener('click', () => {
     location.reload();
 })
 
-input.addEventListener('change', (e: any) => {
+input.addEventListener('change', (e: Event) => {
     e.preventDefault();
+    
     files = input.files;
     dropArea.classList.add('active');
     showFile(files);
     dropArea.classList.remove('active');
 });
 
-dropArea.addEventListener('dragover', (e: any) => {
+dropArea.addEventListener('dragover', (e: Event) => {
     e.preventDefault();
+    
     dropArea.classList.add('active');
     dragText.textContent = 'Drop to upload the files.';
-
 });
 
-dropArea.addEventListener('dragleave', (e: any) => {
+dropArea.addEventListener('dragleave', (e: Event) => {
     e.preventDefault();
     dropArea.classList.remove('active');
     dragText.textContent = 'Drag and drop files.';
@@ -50,6 +51,7 @@ dropArea.addEventListener('drop', (e: any) => {
 let showFile = (files: any) => {
     if (files.length === undefined) {
         processFile(files);
+        
     } else {
         for (const file of files) {
             processFile(file);
@@ -61,9 +63,10 @@ let processFile = (file: any) => {
     const docType = file.type;
     const validExtensions: Array<string> = ['image/jpg', 'image/jpeg', 'image/png', 'image/gif'];
 
+    const fileReader = new FileReader();
     if (validExtensions.includes(docType)) {
-        const fileReader: any = new FileReader();
         const id: string = `file-${Math.random().toString(32).substring(7)}`;
+        console.log(fileReader);
         
         fileReader.addEventListener('load', () => {
             const fileURL = fileReader.result;
@@ -82,6 +85,7 @@ let processFile = (file: any) => {
             fileReader.readAsDataURL(file);
             uploadFile(file, id);
         });
+        
     } else {
         alert(`It isn't a valid file`);
     };
@@ -93,10 +97,18 @@ let uploadFile = async (file: any, id: any) => {
     
     try {
         const url = 'http://localhost:8080/api/upload';
+        const token = localStorage.getItem('token');
+        const headers: any = {
+            'Content-Type': 'application/json',
+            'authorization': token
+        }
+        const myHeaders = new Headers(headers);
+
         const response: any = fetch(url, {
             method: 'POST',
             body: JSON.stringify(formData),
-            headers: { 'Content-Type': 'application/json' }
+            headers: myHeaders,
+            mode: 'no-cors'
         });
         
         const responseText: any = response.text();

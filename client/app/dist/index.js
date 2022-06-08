@@ -64,9 +64,10 @@ let showFile = (files) => {
 let processFile = (file) => {
     const docType = file.type;
     const validExtensions = ['image/jpg', 'image/jpeg', 'image/png', 'image/gif'];
+    const fileReader = new FileReader();
     if (validExtensions.includes(docType)) {
-        const fileReader = new FileReader();
         const id = `file-${Math.random().toString(32).substring(7)}`;
+        console.log(fileReader);
         fileReader.addEventListener('load', () => {
             const fileURL = fileReader.result;
             const image = `
@@ -94,10 +95,17 @@ let uploadFile = (file, id) => __awaiter(void 0, void 0, void 0, function* () {
     formData.append('file', file);
     try {
         const url = 'http://localhost:8080/api/upload';
+        const token = localStorage.getItem('token');
+        const headers = {
+            'Content-Type': 'application/json',
+            'authorization': token
+        };
+        const myHeaders = new Headers(headers);
         const response = fetch(url, {
             method: 'POST',
             body: JSON.stringify(formData),
-            headers: { 'Content-Type': 'application/json' }
+            headers: myHeaders,
+            mode: 'no-cors'
         });
         const responseText = response.text();
         console.log(responseText);
